@@ -10,7 +10,7 @@ Se debe tener python instalado, verion 3.10 o superior.
 la versión en la que se desarrolló fue: Python 3.12.1
 
 # Clonar el repositorio
-git clone https://github.com/tu_usuario/tu_proyecto.git
+git clone https://github.com/FELIPEVILLAMIL/AutomationFlow_POM_rahulshettyacademy.git
 
 # Navegar al directorio del proyecto
 cd tu_proyecto
