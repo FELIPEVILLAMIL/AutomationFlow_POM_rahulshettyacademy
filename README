@@ -1,8 +1,7 @@
-# AUTOMATIZACIÓN DE LOGIN, ADD TO CART AND CHECKOUT 
+# AUTOMATIZACIÓN DE LOGIN, BUSQUEDA Y CIERRE DE SESIÓN
 
 
 Este es el desarrollo de la sección de automatización de varias funcionalidades de una pagina de prueba, para esta solución se utiliza una orientación page object model, con selenium y python.
-Pagina a testear: https://rahulshettyacademy.com/loginpagePractise/
 
 ## Instalación
 
@@ -10,7 +9,7 @@ Se debe tener python instalado, verion 3.10 o superior.
 la versión en la que se desarrolló fue: Python 3.12.1
 
 # Clonar el repositorio
-git clone https://github.com/FELIPEVILLAMIL/AutomationFlow_POM_rahulshettyacademy.git
+git clone repo-link.com
 
 # Navegar al directorio del proyecto
 cd tu_proyecto
@@ -20,5 +19,4 @@ pip install -r requirements.txt
 
 # Ejecutar el proyecto
 Desde el path del proyecto.
-Para ejecutar en consola puede ser con: pytest -s   
-Para ejecutar tanto en consola como generar reporte html: pytest --html=report.html 
+ejecutar el archivo main.py
