@@ -72,3 +72,4 @@ class HomePage:
     def check_alert_message(self):
         messagew = WebDriverWait(self.driver, 10).until(EC.visibility_of_element_located(self.order_id_field))
         return messagew.text
+    

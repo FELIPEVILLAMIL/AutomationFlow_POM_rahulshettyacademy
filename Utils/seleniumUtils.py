@@ -24,6 +24,10 @@ def wait_clickable(driver,element):
             break
         except Exception as e:
             print(f'{element} was not clickable')
-    
-            
-        
+def wait_button_is_disabled(driver, element):
+    try: # Espera hasta que el botón esté desactivado
+        WebDriverWait(driver, 10).until( EC.element_attribute_to_include((element), 'disabled') )
+        print("El botón está desactivado") 
+    except: 
+        print("El botón no se desactivó en el tiempo esperado")
+

@@ -5,6 +5,8 @@ UserName="jresplandor"
 Password="CLARO12#"
 RUT1 = "15451737-5" #tiene ordenes de servicio
 RUT2 = "8912574-k" #sin ordenes
+RUT_ORDER = "13942046-2" #tiene ordenes
+ORDER = "1-247248431307"
 
 class BrowserSetup:
     def __init__(self):

@@ -3,9 +3,12 @@ from Utils.seleniumUtils import *
 from Pages.LoginPage import LoginPage
 from Pages.home_page import HomePage
 from Pages.query_page import QueryPage
+from Pages.orders_page import OrdersPage
+from Pages.report_page import ReportPage
 import time
 from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.common.action_chains import ActionChains
+#from datatime import datatime
 
 
 def login(driver):
@@ -82,6 +85,57 @@ def search_info_user(driver,Rut):
         print("failed consultation")
         datos_usuario={}
         return datos_usuario
+    
+
+def orders_info_user(driver,Rut):
+    """Esta funcion es usada para realizar la busqueda y recoleccion de los datos de un usuario identificado por un RUT unico
+
+    Args:
+        driver (driver): _description_
+    """
+    try:
+        orders_page = OrdersPage(driver)
+        report_page = ReportPage(driver)
+        wait_element(driver,orders_page.orders_option)
+        orders_page.open_orders() 
+        wait_element(driver,orders_page.parameter_dropdown)
+        orders_page.select_parameter("Todos los pedidos de ventas") 
+        wait_element(driver,orders_page.table_first_element)
+        orders_page.open_search_option()
+        wait_element(driver,orders_page.specify_query)
+        orders_page.select_element_to_click(orders_page.click_search_order_type)
+        time.sleep(2)
+        orders_page.fill_search_field(orders_page.search_input_order_type,"Pedido de ventas")
+        orders_page.select_element_to_click(orders_page.click_search_account)
+        orders_page.fill_search_field(orders_page.search_input_account,Rut)
+        #enter
+        ActionChains(driver).key_down(Keys.RETURN).key_up(Keys.RETURN).perform() 
+        
+        wait_button_is_disabled(driver,orders_page.cancel_order)
+        print("paso el wait")
+        if (orders_page.check_if_orders_in_column(orders_page.orders_column)==0):
+            print("no hay elementos")
+            return "No hay ordenes con ese numero de RUT"
+        wait_element(driver,orders_page.sort_table)
+        orders_page.click_sort_column()
+        wait_element(driver,orders_page.sort_table_desc)
+        orders_page.click_element_desc()
+        print("Llego aquí")
+        time.sleep(10)
+        orders_page.get_order_list()
+        time.sleep(10)
+        orders_page.search_order("1-247248431307")
+        
+        time.sleep(1000)
+
+        #wait_element(driver,orders_page.) #no se como darle la espera para que organice la tabla
+        #orders_page.change_date_format()
+        
+        
+    except Exception as e:
+        print("failed orders")
+        print(e)
+        
 
 def logout(driver):
     time.sleep(1)
