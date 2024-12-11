@@ -20,6 +20,7 @@ def login(driver):
     for attempts in range(3):
         try:
             driver.get(BaseUrl)
+            driver.execute_script("document.body.style.zoom='67%'") #zoom del 67%
             login_page = LoginPage(driver)
             home_page = HomePage(driver)
             login_page.enter_username(UserName)
@@ -125,7 +126,7 @@ def orders_info_user(driver,Rut):
         orders_page.get_order_list()
         time.sleep(10)
         orders_page.search_order("1-247248431307")
-        
+        orders_page.get_order_data("1-247248431307")
         time.sleep(1000)
 
         #wait_element(driver,orders_page.) #no se como darle la espera para que organice la tabla

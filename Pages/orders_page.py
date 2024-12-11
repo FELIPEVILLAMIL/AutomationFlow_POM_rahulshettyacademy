@@ -23,6 +23,8 @@ class OrdersPage:
         self.sort_table_desc = (By.XPATH,'//ul[@id="s_S_A2_headerMenu"]//*[@id="SortDesc"]')
         self.orders_column = (By.XPATH, "//td[contains(@id, '_l_Order_Number')]")
         self.cancel_order =(By.ID,"s_2_1_10_0_Ctrl")
+        self.dates_column = (By.XPATH, ".//td[@id[contains(., '_Created')]]") #corregir con el corrector
+        self.status_column = (By.XPATH, ".//td[@id[contains(., '_Status')]]") #corregir con el correcto
         
         #self.home_button = (By.XPATH,'//a[contains(text(),"Página inicial")]')
         #self.table_rows=(By.XPATH,'//table[@id="s_2_l"]/tbody/tr')
@@ -90,6 +92,32 @@ class OrdersPage:
                 time.sleep(1)
                 print(f' was not reachable on attempt {attempts + 1}')
         return info
+    
+    def get_order_data(self,OrderNumber):
+        order_number_cells = self.driver.find_elements(*self.orders_column)
+        order_date_cells = self.driver.find_elements(*self.dates_column)
+        order_status_cells = self.driver.find_elements(*self.status_column)
+        anteriores = []
+        posteriores = []
+        located = False
+        for order_cell, date_cell, status_cell in zip(order_number_cells,order_date_cells,order_status_cells):
+            order_number=order_cell.text
+            order_date=date_cell.text
+            order_status=status_cell.text
+            if order_number == OrderNumber: 
+                located= True
+                info_order = (order_number, order_date, order_status)
+                continue 
+            if located: 
+                posteriores.append((order_number, order_date, order_status)) 
+            else: 
+                anteriores.append((order_number, order_date, order_status))
+        #lo siguiente se hace para tomar solamente los valores mas cercanos a la orden objetivo, hasta 4 valores.
+        posteriores = posteriores[:4]
+        anteriores = anteriores[-4:]
+        
+        print("Datos encontrados:", anteriores, posteriores)
+        return info_order,anteriores,posteriores
 
     """def change_date_format(self, date_column, date_format = "%Y-%m-%d"):
        date_cells = self.driver.find_elements(date_column)

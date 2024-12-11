@@ -29,10 +29,13 @@ class BrowserSetup:
         chrome_options.add_argument('--disable-blink-features=AutomationControlled')
         chrome_options.add_experimental_option("useAutomationExtension", False)
         chrome_options.add_experimental_option("excludeSwitches", ["enable-automation"])
+        #self.driver.set_window_size(1280,720) #tamaño ventana
+       
         # Modificando agent
         user_agent = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.83 Safari/537.36"
         chrome_options.add_argument(f"user-agent={user_agent}")
         self.driver = webdriver.Chrome(options=chrome_options)
+        
         #self.driver = webdriver.Edge()
         return self.driver
     
