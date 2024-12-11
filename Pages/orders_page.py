@@ -29,8 +29,8 @@ class OrdersPage:
         #self.home_button = (By.XPATH,'//a[contains(text(),"Página inicial")]')
         #self.table_rows=(By.XPATH,'//table[@id="s_2_l"]/tbody/tr')
         #self.order_id_field= (By.XPATH,'//*[@id="a_1"]/div/table/tbody/tr[3]/td[3]/div/input')
-       
-
+        action = 0
+        lala =f'jfjfjjf{action}'
     def change_rol(self):
         self.driver.find_element(*self.change_rol_button).click()
 
@@ -107,6 +107,7 @@ class OrdersPage:
             if order_number == OrderNumber: 
                 located= True
                 info_order = (order_number, order_date, order_status)
+                self.selector_to_click_order = order_cell
                 continue 
             if located: 
                 posteriores.append((order_number, order_date, order_status)) 
@@ -118,6 +119,9 @@ class OrdersPage:
         
         print("Datos encontrados:", anteriores, posteriores)
         return info_order,anteriores,posteriores
+    
+    def go_to_order(self):
+        self.selector_to_click_order.click()
 
     """def change_date_format(self, date_column, date_format = "%Y-%m-%d"):
        date_cells = self.driver.find_elements(date_column)
