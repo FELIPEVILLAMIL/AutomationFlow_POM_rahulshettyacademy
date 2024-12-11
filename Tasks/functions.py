@@ -127,8 +127,9 @@ def orders_info_user(driver,Rut):
         time.sleep(10)
         orders_page.search_order("1-247248431307")
         orders_page.get_order_data("1-247248431307")
+        orders_page.go_to_order()
         time.sleep(1000)
-
+        
         #wait_element(driver,orders_page.) #no se como darle la espera para que organice la tabla
         #orders_page.change_date_format()
         
